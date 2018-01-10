@@ -14,10 +14,12 @@ import { HttpClient } from 'selenium-webdriver/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import 'hammerjs';
 import { BrowserAnimationBuilder } from '@angular/platform-browser/animations/src/animation_builder';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
