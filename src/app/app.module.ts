@@ -29,7 +29,7 @@ import {PromotionService} from './services/promotion.service';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { LeaderService } from './services/leader.service';
 import { LoginComponent } from './login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatInputModule, MatRadioModule, MatSelectModule, MatSliderModule,
     MatSlideToggleModule, MatToolbarModule, MatListModule, MatGridListModule,
     MatCardModule, MatIconModule, MatProgressSpinnerModule, MatDialogModule,FlexLayoutModule,
-    AppRoutingModule,FormsModule    
+    AppRoutingModule,ReactiveFormsModule,FormsModule   
   ],
   providers: [DishService,PromotionService,LeaderService],
   entryComponents:[
