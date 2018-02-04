@@ -15,30 +15,28 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
+import {RestangularModule,Restangular} from 'ngx-restangular';
+import {RestangularConfigFactory} from '../shared/restConfig';
+
+
 @Injectable()
 export class DishService {
 
-  constructor(private http:Http,
+  constructor(private restangular:Restangular,
   private processHTTPmsgService :ProcessHttpmsgService) { }
 
   getDishes(): Observable<any> {
-    let response =  this.http.get(baseURL + 'dishes')
-                    .map(res => { return this.processHTTPmsgService.extractData(res); })
-                    .catch(error => {return this.processHTTPmsgService.handleError(error)});
-    return response;                    
+    return this.restangular.all('dishes').getList();
   }
 
   getDish(id: number): Observable<any> {
-    let response =  this.http.get(baseURL + 'dishes/'+ id)
-                    .map(res => { return this.processHTTPmsgService.extractData(res); })
-                    .catch(error => {return this.processHTTPmsgService.handleError(error)});
-    return response;                    
+     return this.restangular.one('dishes',id).get();
   }
 
   getFeaturedDish(): Observable<Dish> {
-    return this.http.get(baseURL + 'dishes?featured=true')
-                    .map(res => { return this.processHTTPmsgService.extractData(res)[0]; })
-                    .catch(error => {return this.processHTTPmsgService.handleError(error)});
+    return this.restangular.all('dishes').getList({featured : true})
+                    .map(dishes => dishes[0]);
+                    
   }
 
   getDishIds(): Observable<number[]> {

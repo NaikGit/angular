@@ -34,6 +34,8 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import {baseURL} from './shared/baseurl';
+import {RestangularModule,Restangular} from 'ngx-restangular';
+import {RestangularConfigFactory} from './shared/restConfig';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,7 @@ import {baseURL} from './shared/baseurl';
     MatInputModule, MatRadioModule, MatSelectModule, MatSliderModule,
     MatSlideToggleModule, MatToolbarModule, MatListModule, MatGridListModule,
     MatCardModule, MatIconModule, MatProgressSpinnerModule, MatDialogModule,FlexLayoutModule,
-    AppRoutingModule,ReactiveFormsModule,FormsModule   
+    AppRoutingModule,ReactiveFormsModule,FormsModule ,RestangularModule.forRoot(RestangularConfigFactory)  
   ],
   providers: [DishService,PromotionService,LeaderService,ProcessHttpmsgService,
     {provide: 'BaseURL', useValue: baseURL}],
