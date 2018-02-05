@@ -54,7 +54,7 @@ export class DishdetailComponent implements OnInit {
     }
   };
 
-  visibity ='shown';
+  visibility ='shown';
 
   constructor(private dishservice: DishService,
     private route: ActivatedRoute,
@@ -67,8 +67,8 @@ export class DishdetailComponent implements OnInit {
      this.dishservice.getDishIds()
      .subscribe(dishIds => this.dishIds = dishIds);
 
-    this.route.params.switchMap((params:Params) => {this.visibity='hidden'; return this.dishservice.getDish(+params['id']);})
-    .subscribe(dish =>{ this.dish = dish;this.dishcopy = dish;this.setPrevNext(dish.id);this.visibity = 'shown';}
+    this.route.params.switchMap((params:Params) => {this.visibility='hidden'; return this.dishservice.getDish(+params['id']);})
+    .subscribe(dish =>{ this.dish = dish;this.dishcopy = dish;this.setPrevNext(dish.id);this.visibility= 'shown';}
     ,errmess=> this.errMess = <any>errmess);
   }
 

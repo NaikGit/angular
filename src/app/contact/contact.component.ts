@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 import {Feedback, ContactType} from '../shared/feedback';
-import { flyInOut } from '../animations/app.animation';
+import {FeedbackserviceService} from '../services/feedbackservice.service';
+import { Params, ActivatedRoute } from '@angular/router';
+import { visibility,flyInOut,expand } from '../animations/app.animation';
+
 
 @Component({
   selector: 'app-contact',
@@ -12,13 +15,16 @@ import { flyInOut } from '../animations/app.animation';
     'style':'display:block;'
   },
   animations:[
-    flyInOut()
+    flyInOut(),
+    visibility(),
+    expand()
   ]
 })
 export class ContactComponent implements OnInit {
-
+  messageSuccess = true;
   feedbackForm: FormGroup;
   feedback: Feedback;
+  feedbackCopy =null;
   contactType = ContactType;
   formErrors = {
     'firstname':'',
@@ -48,12 +54,18 @@ export class ContactComponent implements OnInit {
       'pattern':'Tel. Number must contain only numbers'
     }
   };
+  visibility ='shown';
+  feedbackVisibility = 'shown';
 
-  constructor(private fb: FormBuilder) {
+  constructor(private feedbackservice: FeedbackserviceService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    @Inject ('BaseURL') private BaseURL ) {
     this.createForm();
   }
 
   ngOnInit() {
+
   }
 
   createForm() {
@@ -75,16 +87,26 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
-    this.feedbackForm.reset({
-      firstname:'',
-      lastname:'',
-      telnum:'',
-      email:'',
-      agree:false,
-      contacttype:'None',
-      message:''
+    this.messageSuccess = false;
+    this.feedbackservice.submitFeedback(this.feedback).subscribe( feedback =>{this.feedback = feedback;
+    this.messageSuccess = true;
+    this.visibility = 'hidden';
+    this.feedbackVisibility ='shown';
     });
+    setTimeout(() => {
+      this.visibility = 'shown';
+      this.feedbackVisibility ='hidden';
+      this.feedbackForm.reset({
+        firstname:'',
+        lastname:'',
+        telnum:'',
+        email:'',
+        agree:false,
+        contacttype:'None',
+        message:''
+      });
+    }, 5000);
+    
   }
 
   onValueChanged(data?:any){

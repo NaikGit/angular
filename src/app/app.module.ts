@@ -29,7 +29,7 @@ import {PromotionService} from './services/promotion.service';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { LeaderService } from './services/leader.service';
 import {ProcessHttpmsgService} from './services/process-httpmsg.service';
-
+import {FeedbackserviceService} from './services/feedbackservice.service';
 import { LoginComponent } from './login/login.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
@@ -62,7 +62,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     MatCardModule, MatIconModule, MatProgressSpinnerModule, MatDialogModule,FlexLayoutModule,
     AppRoutingModule,ReactiveFormsModule,FormsModule ,RestangularModule.forRoot(RestangularConfigFactory)  
   ],
-  providers: [DishService,PromotionService,LeaderService,ProcessHttpmsgService,
+  providers: [DishService,PromotionService,LeaderService,ProcessHttpmsgService,FeedbackserviceService,
     {provide: 'BaseURL', useValue: baseURL}],
   entryComponents:[
     LoginComponent

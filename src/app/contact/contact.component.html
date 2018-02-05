@@ -35,10 +35,9 @@
           </div>
         </div>
     </div>
-    <div fxFlex fxFlexOffset="20px" class="form-size">
+    <div fxFlex fxFlexOffset="20px" class="form-size"  [@visibility]="visibility" [@expand]
+    [hidden]="submitted" >
       <h3>Send us your Feedback</h3>
-      <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
-
       <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
         <p>
           <mat-input-container class="half-width" 
@@ -98,4 +97,20 @@
       </form>
     </div>
     
+    <div [hidden]="!submitted"  *ngIf="!feedback">
+        <h4>Send us your Feedback</h4>
+        <mat-spinner></mat-spinner><h4>Submitting Form</h4>
+    </div>
+      
+    <div fxFlex="40" *ngIf="feedback"  [@visibility]="feedbackVisibility" [@expand] >  
+        <h4>Send us your Feedback</h4>
+        <h4>Your Submission</h4>
+        <p><span><b>First Name :</b> {{ feedback.firstname }} </span></p>
+        <p><span><b>Last Name :</b> {{ feedback.lastname }} </span></p>
+        <p><span><b>Tel. Number :</b> {{ feedback.telnum }} </span></p>
+        <p><span><b>Email :</b> {{ feedback.email }}</span> </p>
+        <p><span><b>Contact you  ? :</b> {{ feedback.agree }} </span></p>
+        <p><span><b>How ? :</b> {{ feedback.contacttype }} </span></p>
+        <p><span><b>Feedback :</b> {{ feedback.message }} </span></p>
+    </div>
 </div>
